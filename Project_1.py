@@ -83,19 +83,15 @@ class FourShapeCalc:
     # FIXME: INESSENTIAL -
     #        Also sends the window to the top left corner of the screen the first time a radio
     #        button is selected when called anywhere.
-    def update_window_size(self, x) -> None:
+    def update_window_size(self, x = '') -> None:
         """
         Changes the size of the window slightly wider or slimmer depending on if the word
-        'Circumference' is used.
+        'Circumference' is selected in the OptionMenu.
         """
         if 'Circumference' != self.clicked.get():
-            self.window.resizable(True, True)
             self.window.geometry('300x225')
-            self.window.resizable(False, False)
         else:
-            self.window.resizable(True, True)
             self.window.geometry('320x225')
-            self.window.resizable(False, False)
     
     def set_calc_zone(self, selected: int) -> None:
         """
