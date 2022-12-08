@@ -61,7 +61,8 @@ class FourShapeCalc:
         self.options = ['Area', 'Perimeter']
         self.clicked = StringVar()
         self.clicked.set(self.options[0])
-        self.area_perimeter_om = OptionMenu(self.selection_frame, self.clicked, *self.options)
+        self.area_perimeter_om = OptionMenu(self.selection_frame, self.clicked, *self.options,
+                                            command = lambda: self.update_window_size())
         
         # Packs select_shape_label in select_shape_label_frame.
         self.select_shape_label.pack()
@@ -83,17 +84,22 @@ class FourShapeCalc:
     #        Gives 'TypeError: <lambda>() takes 0 positional arguments but 1 was given' before any
     #        radio button is selected when assigned to area_perimeter_om using 
     #        'command = lambda: self.update_window_size()'.
-    #        Also sends the window to the top right corner of the screen the first time a radio
+    #        Also sends the window to the top left corner of the screen the first time a radio
     #        button is selected when called anywhere.
-    # def update_window_size(self):
-    #     """
-    #     Changes the size of the window slightly wider or slimmer depending on if the word
-    #     'Circumference' is used.
-    #     """
-    #     if self.clicked.get() != 'Circumference':
-    #         self.window.geometry('300x225')
-    #     else:
-    #         self.window.geometry('320x225')
+    def update_window_size(self) -> None:
+        """
+        Changes the size of the window slightly wider or slimmer depending on if the word
+        'Circumference' is used.
+        """
+        print(f'self.clicked.get()')
+        # if 'Circumference' != self.clicked.get():
+        #     self.window.resizable(True, True)
+        #     self.window.geometry('300x225')
+        #     self.window.resizable(False, False)
+        # else:
+        #     self.window.resizable(True, True)
+        #     self.window.geometry('320x225')
+        #     self.window.resizable(False, False)
     
     def set_calc_zone(self, selected: int) -> None:
         """
@@ -119,9 +125,10 @@ class FourShapeCalc:
             menu.add_command(label = option, command = lambda value = option: self.clicked.set(value))
         
         # Definition is commented out, so this is, too.
-        # self.update_window_size()
+        self.update_window_size()
         
-        clicked: str = self.clicked.get()
+        # Gets the current value of the OptionMenu.
+        clicked = self.clicked.get()
         
         def make_buttons() -> None:
             """
@@ -153,7 +160,7 @@ class FourShapeCalc:
                 set_grid(1)
                 make_buttons()
             elif selected == 2:
-                
+                # Sets the frame to calculate the area of a rectangle.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = 'Length')
@@ -161,12 +168,14 @@ class FourShapeCalc:
                 set_grid(2)
                 make_buttons()
             elif selected == 3:
+                # Sets the frame to calculate the area of a square.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = ' Side ')
                 set_grid(1)
                 make_buttons()
             elif selected == 4:
+                # Sets the frame to calculate the area of a triangle.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = 'Base')
@@ -175,12 +184,14 @@ class FourShapeCalc:
                 make_buttons()
         elif clicked == 'Perimeter':
             if selected == 1:
+                # Sets the frame to calculate the circumference of a circle.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = 'Radius')
                 set_grid(1)
                 make_buttons()
             elif selected == 2:
+                # Sets the frame to calculate the perimeter of a rectangle.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = 'Length')
@@ -188,12 +199,14 @@ class FourShapeCalc:
                 set_grid(2)
                 make_buttons()
             elif selected == 3:
+                # Sets the frame to calculate the perimeter of a square.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = ' Side ')
                 set_grid(1)
                 make_buttons()
             elif selected == 4:
+                # Sets the frame to calculate the perimeter of a triangle.
                 self.reset_calc_zone()
                 
                 self.calc_val1_label.config(text = 'Side 1')
@@ -228,11 +241,13 @@ class FourShapeCalc:
         
         if clicked == 'Area':
             if selected == 1:
+                # Calculates and projects the area of the circle.
                 self.result_label.grid_forget()
                 
                 radius: str = self.calc_val1_entry.get().strip()
                 area: str = circ_area(radius)
                 
+                # Works with shapes.area to check for invalid inputs.
                 if area == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -240,12 +255,14 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Circle area = {area}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 2:
+                # Calculates and projects the area of the rectangle.
                 self.result_label.grid_forget()
                 
                 length: str = self.calc_val1_entry.get().strip()
                 width: str = self.calc_val2_entry.get().strip()
                 area: str = rect_area(length, width)
                 
+                # Works with shapes.area to check for invalid inputs.
                 if area == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -253,11 +270,13 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Rectangle area = {area}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 3:
+                # Calculates and projects the area of the square.
                 self.result_label.grid_forget()
                 
                 side: str = self.calc_val1_entry.get().strip()
                 area: str = square_area(side)
                 
+                # Works with shapes.area to check for invalid inputs.
                 if area == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -265,12 +284,14 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Square area = {area}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 4:
+                # Calculates and projects the area of the triangle.
                 self.result_label.grid_forget()
                 
                 base: str = self.calc_val1_entry.get().strip()
                 height: str = self.calc_val2_entry.get().strip()
                 area: str = tri_area(base, height)
                 
+                # Works with shapes.area to check for invalid inputs.
                 if area == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -279,11 +300,13 @@ class FourShapeCalc:
                     self.result_label.grid(row = 2, column = 1)
         elif clicked == 'Perimeter':
             if selected == 1:
+                # Calculates and projects the circumference of the circle.
                 self.result_label.grid_forget()
                 
                 radius: str = self.calc_val1_entry.get().strip()
                 circumference: str = circ_circumference(radius)
                 
+                # Works with shapes.perimeter to check for invalid inputs.
                 if circumference == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -291,12 +314,14 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Circle circumference = {circumference}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 2:
+                # Calculates and projects the perimeter of the rectangle.
                 self.result_label.grid_forget()
                 
                 length: str = self.calc_val1_entry.get().strip()
                 width: str = self.calc_val2_entry.get().strip()
                 perimeter: str = rect_perimeter(length, width)
                 
+                # Works with shapes.perimeter to check for invalid inputs.
                 if perimeter == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -304,11 +329,13 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Rectangle perimeter = {perimeter}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 3:
+                # Calculates and projects the perimeter of the square.
                 self.result_label.grid_forget()
                 
                 side: str = self.calc_val1_entry.get().strip()
                 perimeter: str = square_perimeter(side)
                 
+                # Works with shapes.perimeter to check for invalid inputs.
                 if perimeter == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)
@@ -316,6 +343,7 @@ class FourShapeCalc:
                     self.result_label.config(text = f'Square perimeter = {perimeter}')
                     self.result_label.grid(row = 2, column = 1)
             elif selected == 4:
+                # Calculates and projects the perimeter of the triangle.
                 self.result_label.grid_forget()
                 
                 side1: str = self.calc_val1_entry.get().strip()
@@ -323,6 +351,7 @@ class FourShapeCalc:
                 side3: str = self.calc_val3_entry.get().strip()
                 perimeter: str = tri_perimeter(side1, side2, side3)
                 
+                # Works with shapes.perimeter to check for invalid inputs.
                 if perimeter == 'ValErr':
                     self.result_label.config(text = 'Numeric values only')
                     self.result_label.grid(row = 2, column = 1)

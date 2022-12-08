@@ -1,27 +1,33 @@
 from math import pi
 
-def circ_area():
-    r = float(input('Circle radius: ').strip())
-    A = f'{pi * r ** 2:.2f}'
-    
-    return A
+def circ_area(radius):
+    try:
+        area = f'{pi * float(radius) ** 2:.2f}'
+    except ValueError:
+        return 'ValErr'
+    else:
+        return area
 
-def rect_area():
-    l = float(input('Rectangle length: ').strip())
-    w = float(input('Rectangle width: ').strip())
-    A = f'{l * w:.2f}'
-    
-    return A
+def rect_area(length, width):
+    try:
+        area = f'{float(length) * float(width):.2f}'
+    except ValueError:
+        return 'ValErr'
+    else:
+        return area
 
-def square_area():
-    s = float(input('Square length: ').strip())
-    A = f'{s ** 2:.2f}'
-    
-    return A
+def square_area(side):
+    try:
+        area = f'{float(side) ** 2:.2f}'
+    except ValueError:
+        return 'ValErr'
+    else:
+        return area
 
-def tri_area():
-    b = float(input('Triangle base: ').strip())
-    h = float(input('Triangle height: ').strip())
-    A = f'{0.5 * b * h:.2f}'
-    
-    return A
+def tri_area(base, height):
+    try:
+        area = f'{0.5 * float(base) * float(height):.2f}'
+    except ValueError:
+        return 'ValErr'
+    else:
+        return area
