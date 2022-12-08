@@ -81,9 +81,6 @@ class FourShapeCalc:
         self.result_frame.pack()
     
     # FIXME: INESSENTIAL -
-    #        Gives 'TypeError: <lambda>() takes 0 positional arguments but 1 was given' before any
-    #        radio button is selected when assigned to area_perimeter_om using 
-    #        'command = lambda: self.update_window_size()'.
     #        Also sends the window to the top left corner of the screen the first time a radio
     #        button is selected when called anywhere.
     def update_window_size(self, x) -> None:
@@ -123,7 +120,6 @@ class FourShapeCalc:
         for option in self.options:
             menu.add_command(label = option, command = lambda value = option: self.clicked.set(value))
         
-        # Definition is commented out, so this is, too.
         self.update_window_size()
         
         # Gets the current value of the OptionMenu.
