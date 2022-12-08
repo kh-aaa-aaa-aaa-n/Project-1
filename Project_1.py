@@ -62,7 +62,7 @@ class FourShapeCalc:
         self.clicked = StringVar()
         self.clicked.set(self.options[0])
         self.area_perimeter_om = OptionMenu(self.selection_frame, self.clicked, *self.options,
-                                            command = lambda: self.update_window_size())
+                                            command = self.update_window_size)
         
         # Packs select_shape_label in select_shape_label_frame.
         self.select_shape_label.pack()
@@ -86,7 +86,7 @@ class FourShapeCalc:
     #        'command = lambda: self.update_window_size()'.
     #        Also sends the window to the top left corner of the screen the first time a radio
     #        button is selected when called anywhere.
-    def update_window_size(self) -> None:
+    def update_window_size(self, x) -> None:
         """
         Changes the size of the window slightly wider or slimmer depending on if the word
         'Circumference' is used.
@@ -128,7 +128,7 @@ class FourShapeCalc:
         self.update_window_size()
         
         # Gets the current value of the OptionMenu.
-        clicked = self.clicked.get()
+        clicked: str = self.clicked.get()
         
         def make_buttons() -> None:
             """
