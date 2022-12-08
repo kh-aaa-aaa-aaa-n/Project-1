@@ -91,15 +91,14 @@ class FourShapeCalc:
         Changes the size of the window slightly wider or slimmer depending on if the word
         'Circumference' is used.
         """
-        print(f'self.clicked.get()')
-        # if 'Circumference' != self.clicked.get():
-        #     self.window.resizable(True, True)
-        #     self.window.geometry('300x225')
-        #     self.window.resizable(False, False)
-        # else:
-        #     self.window.resizable(True, True)
-        #     self.window.geometry('320x225')
-        #     self.window.resizable(False, False)
+        if 'Circumference' != self.clicked.get():
+            self.window.resizable(True, True)
+            self.window.geometry('300x225')
+            self.window.resizable(False, False)
+        else:
+            self.window.resizable(True, True)
+            self.window.geometry('320x225')
+            self.window.resizable(False, False)
     
     def set_calc_zone(self, selected: int) -> None:
         """
