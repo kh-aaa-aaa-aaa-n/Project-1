@@ -10,11 +10,22 @@ def circ_area(radius):
 
 def rect_area(length, width):
     try:
-        area = f'{float(length) * float(width):.2f}'
+        length = float(length)
     except ValueError:
-        return 'ValErr'
+        length = 'ValErr_l'
+    
+    try:
+        width = float(width)
+    except ValueError:
+        width = 'ValErr_w'
+    
+    if length == 'ValErr_l' and width == 'ValErr_w':
+        return 'ValErr', length, width
+    elif length == 'ValErr_l' or width == 'ValErr_w':
+        return None, length, width
     else:
-        return area
+        area = f'{length * width:.2f}'
+        return area, length, width
 
 def square_area(side):
     try:
@@ -26,8 +37,21 @@ def square_area(side):
 
 def tri_area(base, height):
     try:
-        area = f'{0.5 * float(base) * float(height):.2f}'
+        base = float(base)
     except ValueError:
-        return 'ValErr'
+        base = 'ValErr_b'
+    
+    try:
+        height = float(height)
+    except ValueError:
+        height = 'ValErr_h'
+    
+    if base == 'ValErr_b' and height == 'ValErr_h':
+        return 'ValErr', base, height
+    elif base == 'ValErr_b' or height == 'ValErr_h':
+        return None, base, height
     else:
-        return area
+        area = f'{0.5 * base * height:.2f}'
+        return area, base, height
+
+rect_area(1, 'c')

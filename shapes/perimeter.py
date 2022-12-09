@@ -10,11 +10,22 @@ def circ_circumference(radius):
 
 def rect_perimeter(length, width):
     try:
-        perimeter = f'{float(length) * 2 + float(width) * 2:.2f}'
+        length = float(length)
     except ValueError:
-        return 'ValErr'
+        length = 'ValErr_l'
+    
+    try:
+        width = float(width)
+    except ValueError:
+        width = 'ValErr_w'
+    
+    if length == 'ValErr_l' and width == 'ValErr_w':
+        return 'ValErr', length, width
+    elif length == 'ValErr_l' or width == 'ValErr_w':
+        return None, length, width
     else:
-        return perimeter
+        perimeter = f'{length * 2 + width * 2:.2f}'
+        return perimeter, length, width
 
 def square_perimeter(side):
     try:
@@ -26,8 +37,30 @@ def square_perimeter(side):
 
 def tri_perimeter(side1, side2, side3):
     try:
-        perimeter = f'{float(side1) + float(side2) + float(side3):.2f}'
+        side1 = float(side1)
     except ValueError:
-        return 'ValErr'
+        side1 = 'ValErr_s1'
+    
+    try:
+        side2 = float(side2)
+    except ValueError:
+        side2 = 'ValErr_s2'
+    
+    try:
+        side3 = float(side3)
+    except ValueError:
+        side3 = 'ValErr_s3'
+    
+    if side1 == 'ValErr_s1' and side2 == 'ValErr_s2' and side3 == 'ValErr_s3':
+        return 'ValErr', side1, side2, side3
+    elif side1 == 'ValErr_s1' and side2 == 'ValErr_s2':
+        return 'ValErr_s1s2', side1, side2, side3
+    elif side1 == 'ValErr_s1' and side3 == 'ValErr_s3':
+        return 'ValErr_s1s3', side1, side2, side3
+    elif side2 == 'ValErr_s2' and side3 == 'ValErr_s3':
+        return 'ValErr_s2s3', side1, side2, side3
+    elif side1 == 'ValErr_s1' or side2 == 'ValErr_s2' or side3 == 'ValErr_s3':
+        return None, side1, side2, side3
     else:
-        return perimeter
+        perimeter = f'{side1 + side2 + side3:.2f}'
+        return perimeter, side1, side2, side3
