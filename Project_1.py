@@ -17,13 +17,13 @@ class FourShapeCalc:
         self.window.resizable(False, False)
         
         # Creates all the frames used inside the main window.
-        self.select_shape_label_frame = Frame(self.window)
+        self.title_frame = Frame(self.window)
         self.selection_frame = Frame(self.window)
         self.calc_frame = Frame(self.window)
         self.result_frame = Frame(self.window)
         
         # Creates the label in select_shape_label_frame.
-        self.select_shape_label = Label(self.select_shape_label_frame, text = 'Select Shape', pady = 10)
+        self.title_label = Label(self.title_frame, text = 'Select Shape', pady = 10)
         
         # Creates the labels in the calc_frame frame.
         self.calc_val1_label = Label(self.calc_frame, padx = 10, pady = 5)
@@ -68,7 +68,7 @@ class FourShapeCalc:
                                             command = self.update_window_size)
         
         # Packs select_shape_label in select_shape_label_frame.
-        self.select_shape_label.pack()
+        self.title_label.pack()
         
         # Puts the radio buttons and option menu in selection_frame with grid.
         self.area_perimeter_om.grid(row = 0, column = 1, rowspan = 2, padx = 7)
@@ -78,7 +78,7 @@ class FourShapeCalc:
         self.tri_radiobutton.grid(row = 1, column = 2, pady = 2, sticky = 'w')
         
         # Packs the frames to the main window.
-        self.select_shape_label_frame.pack()
+        self.title_frame.pack()
         self.selection_frame.pack()
         self.calc_frame.pack(anchor = 'w', pady = 15)
         self.result_frame.pack()
