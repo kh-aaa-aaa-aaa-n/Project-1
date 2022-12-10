@@ -8,7 +8,7 @@ class FourShapeCalc:
     """
     def __init__(self) -> None:
         """
-        Constructor to initialize a FourShapeCalc object.
+        Constructor to initialize a FourShapeCalc instance.
         """
         # Creates the main/root window.
         self.window = Tk()
@@ -22,7 +22,7 @@ class FourShapeCalc:
         self.calc_frame = Frame(self.window)
         self.result_frame = Frame(self.window)
         
-        # Creates the label in select_shape_label_frame.
+        # Creates the label in title_frame.
         self.title_label = Label(self.title_frame, text = 'Select Shape', pady = 10)
         
         # Creates the labels in the calc_frame frame.
@@ -67,7 +67,7 @@ class FourShapeCalc:
         self.area_perimeter_om = OptionMenu(self.selection_frame, self.clicked, *self.options,
                                             command = self.update_window_size)
         
-        # Packs select_shape_label in select_shape_label_frame.
+        # Packs title_label in title_frame.
         self.title_label.pack()
         
         # Puts the radio buttons and option menu in selection_frame with grid.
@@ -90,6 +90,9 @@ class FourShapeCalc:
         """
         Changes the size of the window slightly wider or slimmer depending on if the word
         'Circumference' is selected in the OptionMenu.
+        
+        :param x: I honestly don't know why this is here or why it works, but it's required for the
+                  implementation to work properly. Don't touch it, or it may break the function.
         """
         if 'Circumference' != self.clicked.get():
             self.window.geometry('300x225')
@@ -249,13 +252,32 @@ class FourShapeCalc:
         selected: int = self.selected.get()
         clicked: str = self.clicked.get()
         
+        area: str
+        radius: str
+        length: str
+        width: str
+        leng: str
+        wid: str
+        side: str
+        base: str
+        height: str
+        bas: str
+        hei: str
+        circumference: str
+        perimeter: str
+        side1: str
+        side2: str
+        side3: str
+        sid1: str
+        sid2: str
+        sid3: str
         if clicked == 'Area':
             if selected == 1:
                 # Calculates and projects the area of the circle.
                 clear_results()
                 
-                radius: str = self.calc_val1_entry.get().strip()
-                area: str = circ_area(radius)
+                radius = self.calc_val1_entry.get().strip()
+                area = circ_area(radius)
                 
                 # Works with shapes.area to check for invalid inputs in circ_area.
                 if area == 'ValErr':
@@ -268,11 +290,8 @@ class FourShapeCalc:
                 # Calculates and projects the area of the rectangle.
                 clear_results()
                 
-                length: str = self.calc_val1_entry.get().strip()
-                width: str = self.calc_val2_entry.get().strip()
-                area: str
-                leng: str
-                wid: str
+                length = self.calc_val1_entry.get().strip()
+                width = self.calc_val2_entry.get().strip()
                 area, leng, wid = rect_area(length, width)
                 
                 # Works with shapes.area to check for invalid inputs in rect_area.
@@ -315,8 +334,8 @@ class FourShapeCalc:
                 # Calculates and projects the area of the square.
                 clear_results()
                 
-                side: str = self.calc_val1_entry.get().strip()
-                area: str = square_area(side)
+                side = self.calc_val1_entry.get().strip()
+                area = square_area(side)
                 
                 # Works with shapes.area to check for invalid inputs in square_area.
                 if area == 'ValErr':
@@ -329,11 +348,8 @@ class FourShapeCalc:
                 # Calculates and projects the area of the triangle.
                 clear_results()
                 
-                base: str = self.calc_val1_entry.get().strip()
-                height: str = self.calc_val2_entry.get().strip()
-                area: str
-                bas: str
-                hei: str
+                base = self.calc_val1_entry.get().strip()
+                height = self.calc_val2_entry.get().strip()
                 area, bas, hei = tri_area(base, height)
                 
                 # Works with shapes.area to check for invalid inputs in tri_area.
@@ -377,8 +393,8 @@ class FourShapeCalc:
                 # Calculates and projects the circumference of the circle.
                 clear_results()
                 
-                radius: str = self.calc_val1_entry.get().strip()
-                circumference: str = circ_circumference(radius)
+                radius = self.calc_val1_entry.get().strip()
+                circumference = circ_circumference(radius)
                 
                 # Works with shapes.perimeter to check for invalid inputs in circ_circumference.
                 if circumference == 'ValErr':
@@ -391,11 +407,8 @@ class FourShapeCalc:
                 # Calculates and projects the perimeter of the rectangle.
                 clear_results()
                 
-                length: str = self.calc_val1_entry.get().strip()
-                width: str = self.calc_val2_entry.get().strip()
-                perimeter: str
-                leng: str
-                wid: str
+                length = self.calc_val1_entry.get().strip()
+                width = self.calc_val2_entry.get().strip()
                 perimeter, leng, wid = rect_perimeter(length, width)
                 
                 # Works with shapes.perimeter to check for invalid inputs in rect_perimeter.
@@ -438,8 +451,8 @@ class FourShapeCalc:
                 # Calculates and projects the perimeter of the square.
                 clear_results()
                 
-                side: str = self.calc_val1_entry.get().strip()
-                perimeter: str = square_perimeter(side)
+                side = self.calc_val1_entry.get().strip()
+                perimeter = square_perimeter(side)
                 
                 # Works with shapes.perimeter to check for invalid inputs in square_perimeter().
                 if perimeter == 'ValErr':
@@ -452,13 +465,9 @@ class FourShapeCalc:
                 # Calculates and projects the perimeter of the triangle.
                 clear_results()
                 
-                side1: str = self.calc_val1_entry.get().strip()
-                side2: str = self.calc_val2_entry.get().strip()
-                side3: str = self.calc_val3_entry.get().strip()
-                perimeter: str
-                sid1: str
-                sid2: str
-                sid3: str
+                side1 = self.calc_val1_entry.get().strip()
+                side2 = self.calc_val2_entry.get().strip()
+                side3 = self.calc_val3_entry.get().strip()
                 perimeter, sid1, sid2, sid3 = tri_perimeter(side1, side2, side3)
                 
                 # Works with shapes.perimeter to check for invalid inputs in tri_perimeter.
